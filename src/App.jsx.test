@@ -1,0 +1,13 @@
+import React from 'react';
+
+function App() {
+  console.log("App is rendering");
+  return (
+    <div style={{ padding: '20px', color: 'white' }}>
+      <h1>React is Working!</h1>
+      <p>If you see this, the basic render is working.</p>
+    </div>
+  );
+}
+
+export default App;

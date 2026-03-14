@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4c4ceb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Reports - AI Data Analytics</title>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<nav class="border-b border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between h-16 items-center">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-icons text-white text-sm">analytics</span>
+</div>
+<span class="font-bold text-xl tracking-tight">DataPulse <span class="text-primary">AI</span></span>
+</div>
+<div class="hidden md:flex items-center space-x-8 text-sm font-medium">
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-primary" href="#">Reports</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Datasets</a>
+<a class="text-slate-500 hover:text-primary transition-colors" href="#">Settings</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-icons">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/20 border border-primary/30 overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="User avatar professional portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaVwizCbebuVF46oI-MFuF8NLgwIpXRICRQ2i50gJyVrBVY-E93v6wxNmbAgXidteXlQKBh9yyqG0tUr1yqiLRxOn-kSgOFQiS32T-sJ-GIK8mQz3o665GAwQlpYvOBs2KgyAIJgK-oRdHcJyTzPo8Psqq-0WQLpR2EhjUq4CpOgjzzvcdb-z0m-3kL7NHUmTJrY3eT6DqDjbzkAC2WKaub76FtrS-d9wlPeZ_HgKsX6DtZMMXQ8tNYW5RXUHCOfvBjZ-M2JqcnZHP"/>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-bold">Analytics Reports</h1>
+<p class="text-slate-500 dark:text-slate-400 mt-1">Manage, schedule and export your AI-generated data insights.</p>
+</div>
+<button class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-semibold transition-all shadow-lg shadow-primary/20">
+<span class="material-icons text-sm">add</span>
+                Generate New Report
+            </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-primary/10 rounded-lg">
+<span class="material-icons text-primary">assessment</span>
+</div>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Total Reports</p>
+<p class="text-2xl font-bold">128</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-emerald-500/10 rounded-lg">
+<span class="material-icons text-emerald-500">schedule</span>
+</div>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Scheduled Tasks</p>
+<p class="text-2xl font-bold">12</p>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-amber-500/10 rounded-lg">
+<span class="material-icons text-amber-500">storage</span>
+</div>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400">Storage Used</p>
+<p class="text-2xl font-bold">4.2 GB</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="relative flex-1 max-w-md">
+<span class="material-icons absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary outline-none" placeholder="Search reports..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-icons text-sm">filter_list</span>
+                        Filters
+                    </button>
+<button class="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium border border-slate-200 dark:border-slate-800 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="material-icons text-sm">sort</span>
+                        Sort
+                    </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50/50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider font-semibold">
+<th class="px-6 py-4">Report Name</th>
+<th class="px-6 py-4">Generated</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Type</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-red-100 dark:bg-red-500/10 flex items-center justify-center text-red-600 dark:text-red-400">
+<span class="material-icons text-base">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-medium">Q4 Market Analysis Trends</div>
+<div class="text-xs text-slate-500">3.4 MB • AI-Synthesized</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm">Oct 24, 2023</div>
+<div class="text-xs text-slate-500 italic">Scheduled: Weekly</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+                                    Ready
+                                </span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-slate-600 dark:text-slate-300">Predictive Model</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors" title="Preview"><span class="material-icons text-sm">visibility</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors" title="Download PDF"><span class="material-icons text-sm">download</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors" title="Schedule"><span class="material-icons text-sm">calendar_today</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-blue-100 dark:bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400">
+<span class="material-icons text-base">table_view</span>
+</div>
+<div>
+<div class="font-medium">User Retention Cohorts</div>
+<div class="text-xs text-slate-500">1.2 MB • CSV Dataset</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm">Oct 23, 2023</div>
+<div class="text-xs text-slate-500 italic">One-time</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+                                    Ready
+                                </span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-slate-600 dark:text-slate-300">Raw Analytics</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors" title="Preview"><span class="material-icons text-sm">visibility</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors" title="Download CSV"><span class="material-icons text-sm">download</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors" title="Schedule"><span class="material-icons text-sm">calendar_today</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-amber-100 dark:bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-400">
+<span class="material-icons text-base">auto_awesome</span>
+</div>
+<div>
+<div class="font-medium">Revenue Growth Projections</div>
+<div class="text-xs text-slate-500">Calculating...</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm">Processing</div>
+<div class="text-xs text-slate-500 italic">Started 2m ago</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary animate-pulse">
+                                    Running AI
+                                </span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-slate-600 dark:text-slate-300">Forecasting</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-50 cursor-not-allowed">
+<button class="p-2 text-slate-400" disabled=""><span class="material-icons text-sm">visibility</span></button>
+<button class="p-2 text-slate-400" disabled=""><span class="material-icons text-sm">download</span></button>
+<button class="p-2 text-slate-400" disabled=""><span class="material-icons text-sm">calendar_today</span></button>
+</div>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-red-100 dark:bg-red-500/10 flex items-center justify-center text-red-600 dark:text-red-400">
+<span class="material-icons text-base">picture_as_pdf</span>
+</div>
+<div>
+<div class="font-medium">Churn Risk Assessment</div>
+<div class="text-xs text-slate-500">2.1 MB • AI-Synthesized</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<div class="text-sm">Oct 20, 2023</div>
+<div class="text-xs text-slate-500 italic">Scheduled: Monthly</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400">
+                                    Ready
+                                </span>
+</td>
+<td class="px-6 py-4">
+<span class="text-sm text-slate-600 dark:text-slate-300">ML Insights</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 text-slate-400 hover:text-primary transition-colors" title="Preview"><span class="material-icons text-sm">visibility</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors" title="Download PDF"><span class="material-icons text-sm">download</span></button>
+<button class="p-2 text-slate-400 hover:text-primary transition-colors" title="Schedule"><span class="material-icons text-sm">calendar_today</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<p class="text-sm text-slate-500 dark:text-slate-400">Showing 4 of 128 reports</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 text-sm font-medium rounded border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-50" disabled="">Previous</button>
+<button class="px-3 py-1 text-sm font-medium rounded border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800">Next</button>
+</div>
+</div>
+</div>
+<div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="bg-primary/5 rounded-2xl border border-primary/20 p-8 flex flex-col items-center text-center">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+<span class="material-icons text-primary text-3xl">auto_fix_high</span>
+</div>
+<h3 class="text-xl font-bold mb-2">Smart Scheduling</h3>
+<p class="text-slate-500 dark:text-slate-400 mb-6 max-w-md">Let DataPulse AI automatically generate and email reports to your stakeholders every Monday morning.</p>
+<button class="text-primary font-semibold hover:underline flex items-center gap-1">
+                    Configure Automation <span class="material-icons text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="bg-slate-900 rounded-2xl p-8 relative overflow-hidden group">
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<img alt="Data Visualization Background" class="w-full h-full object-cover" data-alt="Abstract data visualization with blue glowing lines" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAykUh_trBGHcQGIgSulUdC9B6ENFnLsqdtuEbHfU06bVNz3N-bcnrVRmZ_LKJrhIKkFstl_pnXcPLF9MEVbhsDI9GEZx8avG9fgFooy0QBV1_M_mCPnYpWgafjzcV0TXas3XRzoLXJMhzSGFtjABqjEYoBnpFBCjJe2SqOVLXlxov3ZAj2vYOGMt_FHsN-K4Im6cs_kgKT-OXSiBmdVpk9DHT4vOUB4nAKADzcBqnVIPwY_MMp2_r3hlSg40WyY5hFZHRcI91YkBY"/>
+</div>
+<div class="relative z-10">
+<span class="bg-primary/20 text-primary text-[10px] uppercase font-bold tracking-widest px-2 py-1 rounded mb-4 inline-block">New Feature</span>
+<h3 class="text-xl font-bold text-white mb-2">Interactive Drill-down</h3>
+<p class="text-slate-400 mb-6 max-w-sm">Deep dive into any report metric with our new interactive preview mode. Now available for all Enterprise users.</p>
+<button class="bg-white text-slate-900 px-4 py-2 rounded-lg font-bold text-sm hover:bg-slate-100 transition-colors">
+                        Learn More
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mt-12 border-t border-slate-200 dark:border-slate-800">
+<div class="flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-2 grayscale opacity-50">
+<div class="w-6 h-6 bg-primary rounded-md flex items-center justify-center">
+<span class="material-icons text-white text-xs">analytics</span>
+</div>
+<span class="font-bold tracking-tight">DataPulse AI</span>
+</div>
+<div class="flex gap-8 text-sm text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#">API Status</a>
+</div>
+<p class="text-sm text-slate-500">© 2023 DataPulse AI. All rights reserved.</p>
+</div>
+</footer>
+</body></html>

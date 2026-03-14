@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Analytica AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4c4ceb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-primary/20 px-6 md:px-10 py-4 bg-background-light dark:bg-background-dark">
+<div class="flex items-center gap-3 text-slate-900 dark:text-white">
+<div class="size-8 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Analytica AI</h2>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden md:inline text-slate-500 dark:text-slate-400 text-sm">Don't have an account?</span>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary/10 text-primary hover:bg-primary/20 transition-colors text-sm font-bold">
+<span>Sign Up</span>
+</button>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center p-6">
+<div class="w-full max-w-[440px] flex flex-col gap-8">
+<div class="flex flex-col gap-2">
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Welcome back</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base">Enter your credentials to access your dashboard</p>
+</div>
+<div class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Email address</label>
+<input class="form-input w-full rounded-lg border border-slate-200 dark:border-primary/20 bg-white dark:bg-primary/5 px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="name@company.com" type="email"/>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<label class="text-sm font-medium text-slate-700 dark:text-slate-300">Password</label>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">Forgot password?</a>
+</div>
+<div class="relative flex items-center">
+<input class="form-input w-full rounded-lg border border-slate-200 dark:border-primary/20 bg-white dark:bg-primary/5 px-4 py-3 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<input class="rounded border-slate-300 dark:border-primary/30 bg-white dark:bg-primary/10 text-primary focus:ring-primary" id="remember" type="checkbox"/>
+<label class="text-sm text-slate-600 dark:text-slate-400" for="remember">Keep me signed in for 30 days</label>
+</div>
+<button class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="relative py-2">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-slate-200 dark:border-primary/10"></div>
+</div>
+<div class="relative flex justify-center text-xs uppercase">
+<span class="bg-background-light dark:bg-background-dark px-2 text-slate-500 dark:text-slate-500">Or continue with</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-primary/20 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<img alt="" class="w-5 h-5" data-alt="Google logo icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvpVEUjRbbhmkyERfbyaT5LQRdZcqTQ--SL70GqIjWvAVVbYxHJLx2l-Uyfr_PV5W5DB4t4coGqp9Df7Dp1F0hpVkkUlXlRAw1KsczUszvIdkuV8K67GiULLi8Ma-biFLRq2zF-tOR-sJXuGwjS-PD7Ges9lU74XcdWnlfp4VuVydL2mahJXcwB5CDcXupixnK4VjDiraV9UJF8UwHLtUdiy1_T81j_Y70mNGGU3kDoVrln5gHPo6fNhc202Bqu67d4M68S4EZGDx9"/>
+                            Google
+                        </button>
+<button class="flex items-center justify-center gap-2 rounded-lg border border-slate-200 dark:border-primary/20 px-4 py-2 text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-primary/10 transition-colors">
+<img alt="" class="w-5 h-5" data-alt="Single Sign On icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASTW244B9RPwukMSIrntZajRjAO1k1wGTbm6CKhpvZ9T2I3ykEPpFDfUbm2EMFHt07WaCyHKkBox9xUO6dRHgXB4dCnyVrfQ5mQL0zijv_-mQ1t8fmEs3gVrqn9pgD5cvI2e0rUbfQVA8gmu9Yafyz5SMUWvJ29WPFMqd57M8eZ7i7tYY10_2tPMhqM8frQYQVjosCezVUaRAjK-cStzX1NjnbVcF-ejDk0YKgthyDkYi-aOf5PIq0Y5GJ_WY5pUcKLiS79AhZJc5s"/>
+                            SSO
+                        </button>
+</div>
+</div>
+</main>
+<footer class="p-6 text-center text-slate-500 dark:text-slate-600 text-xs">
+                © 2024 Analytica AI Corp. All rights reserved. <br class="md:hidden"/>
+<a class="hover:text-primary mx-2" href="#">Privacy Policy</a> • 
+                <a class="hover:text-primary mx-2" href="#">Terms of Service</a>
+</footer>
+</div>
+</div>
+</body></html>

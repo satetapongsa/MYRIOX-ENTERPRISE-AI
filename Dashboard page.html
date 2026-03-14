@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Analytics Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4c4ceb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 bg-white dark:bg-slate-900/50 border-r border-slate-200 dark:border-slate-800 flex flex-col h-full">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<h1 class="text-sm font-bold tracking-tight">AI Analytics</h1>
+<p class="text-[10px] text-slate-500 uppercase tracking-widest">Enterprise</p>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary group" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">database</span>
+<span class="text-sm font-medium">Data Sources</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+<span class="text-sm font-medium">AI Models</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">analytics</span>
+<span class="text-sm font-medium">Predictions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">description</span>
+<span class="text-sm font-medium">Reports</span>
+</a>
+<div class="pt-4 pb-2 px-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Administration</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">group</span>
+<span class="text-sm font-medium">Team Members</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="bg-primary/5 rounded-xl p-4 mb-4">
+<p class="text-xs font-semibold text-primary mb-1">Upgrade Available</p>
+<p class="text-[11px] text-slate-500 mb-3 leading-relaxed">Unlock advanced real-time LLM monitoring.</p>
+<button class="w-full bg-primary text-white text-xs font-bold py-2 rounded-lg hover:bg-primary/90 transition-colors">Upgrade Plan</button>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden">
+<img alt="User" data-alt="User profile avatar icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCc-DS84X_cHmxE0-CnyLHpQ9UfbgF-6RSORsUnccm0H40oO814OCnfSP--6RQsFMT6ny2kSRo2tActeZcS9iacKZmv6Eu-MYJ_q0JpYjmDJOVstirgqiJPS7G7vXLQMRYDtHQWnd76jnpHAbeqwcAkNRKytygR3RBKY1Ey33wf2aj9qosFEdw-Gshf1QdRk1chFbmnJlRXOZWdEo-4bXMdfpwLQH0LR5xZ1PTsoGhL4FwJBHjRRFYvV3t8Xdq2Q6uGaThFmkGz5Sma"/>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-xs font-bold truncate">Alex Morgan</p>
+<p class="text-[10px] text-slate-500 truncate">alex@analytics.ai</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-8 border-b border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-background-dark/50 backdrop-blur-sm z-10">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-sm text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-slate-900 dark:text-slate-100 font-medium">Dashboard</span>
+</div>
+<div class="h-4 w-px bg-slate-200 dark:bg-slate-800 hidden md:block"></div>
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-1.5 rounded-lg border-none bg-slate-100 dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search insights..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-slate-800"></div>
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>New Report</span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- Page Title & Time Selector -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="text-2xl font-bold tracking-tight">Analytics Overview</h2>
+<p class="text-slate-500 text-sm">Real-time performance metrics from your connected models.</p>
+</div>
+<div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
+<button class="px-3 py-1.5 text-xs font-bold rounded-md bg-white dark:bg-slate-700 shadow-sm transition-all">Last 24h</button>
+<button class="px-3 py-1.5 text-xs font-bold rounded-md text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Last 7d</button>
+<button class="px-3 py-1.5 text-xs font-bold rounded-md text-slate-500 hover:text-slate-700 dark:hover:text-slate-300">Last 30d</button>
+</div>
+</div>
+<!-- High Level Metrics Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">data_usage</span>
+<span class="text-emerald-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> 12.5%
+                            </span>
+</div>
+<p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Total Ingested</p>
+<p class="text-2xl font-bold mt-1">1.28 GB</p>
+</div>
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">verified</span>
+<span class="text-emerald-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> 0.2%
+                            </span>
+</div>
+<p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Accuracy Rate</p>
+<p class="text-2xl font-bold mt-1">99.42%</p>
+</div>
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">query_stats</span>
+<span class="text-rose-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_down</span> 5.3%
+                            </span>
+</div>
+<p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Inference Latency</p>
+<p class="text-2xl font-bold mt-1">42ms</p>
+</div>
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">hub</span>
+<span class="text-emerald-500 text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +2
+                            </span>
+</div>
+<p class="text-slate-500 text-xs font-semibold uppercase tracking-wider">Active Agents</p>
+<p class="text-2xl font-bold mt-1">12</p>
+</div>
+</div>
+<!-- Charts Area Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Line Chart Placeholder -->
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-slate-800 dark:text-slate-100">Model Response Trends</h3>
+<button class="material-symbols-outlined text-slate-400 hover:text-slate-600">more_horiz</button>
+</div>
+<div class="h-64 relative flex items-end justify-between gap-1 overflow-hidden px-2">
+<!-- Simulated Line Chart with SVG -->
+<div class="absolute inset-0 flex items-center justify-center">
+<svg class="w-full h-full text-primary" preserveaspectratio="none" viewbox="0 0 400 100">
+<path d="M0,80 Q50,20 100,50 T200,30 T300,70 T400,20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="3"></path>
+<path class="fill-primary/5" d="M0,80 Q50,20 100,50 T200,30 T300,70 T400,20 V100 H0 Z"></path>
+</svg>
+</div>
+<div class="flex w-full justify-between items-end h-full z-1">
+<div class="w-full h-full border-b border-slate-100 dark:border-slate-800 border-dashed absolute top-1/4 left-0"></div>
+<div class="w-full h-full border-b border-slate-100 dark:border-slate-800 border-dashed absolute top-2/4 left-0"></div>
+<div class="w-full h-full border-b border-slate-100 dark:border-slate-800 border-dashed absolute top-3/4 left-0"></div>
+</div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+<span>00:00</span>
+<span>04:00</span>
+<span>08:00</span>
+<span>12:00</span>
+<span>16:00</span>
+<span>20:00</span>
+</div>
+</div>
+<!-- Bar Chart Placeholder -->
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold text-slate-800 dark:text-slate-100">Token Usage per Provider</h3>
+<button class="material-symbols-outlined text-slate-400 hover:text-slate-600">more_horiz</button>
+</div>
+<div class="h-64 flex items-end justify-around gap-4">
+<div class="w-10 bg-primary/20 rounded-t-lg relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-3/4"></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 text-white text-[10px] px-2 py-1 rounded">75%</div>
+</div>
+<div class="w-10 bg-primary/20 rounded-t-lg relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-2/4"></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 text-white text-[10px] px-2 py-1 rounded">50%</div>
+</div>
+<div class="w-10 bg-primary/20 rounded-t-lg relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-full"></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 text-white text-[10px] px-2 py-1 rounded">100%</div>
+</div>
+<div class="w-10 bg-primary/20 rounded-t-lg relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-4/6"></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 text-white text-[10px] px-2 py-1 rounded">66%</div>
+</div>
+<div class="w-10 bg-primary/20 rounded-t-lg relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all h-1/3"></div>
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-slate-900 text-white text-[10px] px-2 py-1 rounded">33%</div>
+</div>
+</div>
+<div class="flex justify-around mt-4 text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+<span>GPT-4</span>
+<span>Claude</span>
+<span>Llama 3</span>
+<span>Gemini</span>
+<span>Mistral</span>
+</div>
+</div>
+</div>
+<!-- Tables/Detailed Breakdown Section -->
+<div class="bg-white dark:bg-slate-900/50 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+<h3 class="font-bold text-slate-800 dark:text-slate-100">Live Prediction Logs</h3>
+<div class="flex gap-2">
+<button class="text-xs font-bold text-slate-500 hover:text-primary flex items-center gap-1 border border-slate-200 dark:border-slate-800 px-3 py-1.5 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span> Filter
+                            </button>
+<button class="text-xs font-bold text-slate-500 hover:text-primary flex items-center gap-1 border border-slate-200 dark:border-slate-800 px-3 py-1.5 rounded-lg transition-colors">
+<span class="material-symbols-outlined text-sm">download</span> Export
+                            </button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 font-medium">
+<tr>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Source ID</th>
+<th class="px-6 py-4">Model</th>
+<th class="px-6 py-4">Time</th>
+<th class="px-6 py-4">Efficiency</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-slate-500">#PX-9421</td>
+<td class="px-6 py-4 font-medium">Customer Sentiment V2</td>
+<td class="px-6 py-4 text-slate-500">2 mins ago</td>
+<td class="px-6 py-4">
+<div class="w-24 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="w-[85%] h-full bg-primary"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">open_in_new</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 text-[10px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            Active
+                                        </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-slate-500">#PX-8812</td>
+<td class="px-6 py-4 font-medium">Supply Chain Forecaster</td>
+<td class="px-6 py-4 text-slate-500">14 mins ago</td>
+<td class="px-6 py-4">
+<div class="w-24 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="w-[62%] h-full bg-primary"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">open_in_new</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-[10px] font-bold uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                            Cooling
+                                        </span>
+</td>
+<td class="px-6 py-4 font-mono text-xs text-slate-500">#PX-7729</td>
+<td class="px-6 py-4 font-medium">Anomaly Detector Plus</td>
+<td class="px-6 py-4 text-slate-500">1 hour ago</td>
+<td class="px-6 py-4">
+<div class="w-24 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+<div class="w-[12%] h-full bg-primary"></div>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">open_in_new</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

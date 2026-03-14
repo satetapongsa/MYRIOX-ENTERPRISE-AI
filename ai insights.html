@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Insights - Enterprise Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#4c4ceb",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#111121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col font-display">
+<header class="flex items-center justify-between border-b border-slate-200 dark:border-primary/20 px-6 py-4 bg-white dark:bg-background-dark sticky top-0 z-10">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight">AI Insights</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="size-8 rounded-full bg-primary/30 overflow-hidden border border-primary/40">
+<img class="w-full h-full object-cover" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG3-Mfah_BSf_WXvpo3tU9Dw9k5ouweFULO6SvZc4d0MAkaNk--f1C7w_TZCmVJOuVcfnZxqZkIh5GxZrjkOy3lG_DVHeQQKaL-vPsaI-X5pwl5VuRcCo33ModvQRqxOunaCGete9bpkTA9-R6IrdJ-rpW2kzRnY4T1PRB2PqCDp9Xkt-RCXPGLpcWe4Qu9N3joglz3iCH05STactiEz9E7Fvy--MX0fR_hX4xgHhzMUUhKFOdapBEA-I4jLZS-sns1yK8Y-MV_uqb"/>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-6xl w-full mx-auto px-6 py-8">
+<section class="mb-12">
+<div class="max-w-3xl mx-auto">
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-2 shadow-sm focus-within:ring-2 focus-within:ring-primary/40 transition-all">
+<div class="flex gap-3 items-start p-2">
+<div class="mt-2 text-primary">
+<span class="material-symbols-outlined">magic_button</span>
+</div>
+<textarea class="w-full bg-transparent border-none focus:ring-0 text-lg placeholder:text-slate-400 dark:placeholder:text-slate-500 py-2 resize-none h-24" placeholder="What would you like to know about your data today?"></textarea>
+</div>
+<div class="flex items-center justify-between border-t border-slate-100 dark:border-primary/10 pt-2 px-2 pb-1">
+<div class="flex gap-1">
+<button class="p-2 text-slate-500 hover:text-primary dark:hover:text-primary-light transition-colors">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">insert_chart</span>
+</button>
+</div>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-lg font-semibold flex items-center gap-2 transition-all">
+<span>Ask AI</span>
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+<div class="mt-4 flex flex-wrap gap-2 justify-center">
+<span class="text-xs text-slate-500 font-medium">Try asking:</span>
+<button class="text-xs px-3 py-1 bg-slate-100 dark:bg-primary/10 rounded-full hover:bg-primary/20 transition-colors">"Summarize last week's churn"</button>
+<button class="text-xs px-3 py-1 bg-slate-100 dark:bg-primary/10 rounded-full hover:bg-primary/20 transition-colors">"Compare Q3 revenue to Q2"</button>
+<button class="text-xs px-3 py-1 bg-slate-100 dark:bg-primary/10 rounded-full hover:bg-primary/20 transition-colors">"Top performing regions"</button>
+</div>
+</div>
+</section>
+<section>
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-lg font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+                    Latest Automated Insights
+                </h2>
+<button class="text-sm font-medium text-primary hover:underline">Refresh analysis</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-5 hover:border-primary/40 transition-all flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-green-100 dark:bg-green-500/10 text-green-600 rounded-lg">
+<span class="material-symbols-outlined">trending_up</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Retention</span>
+</div>
+<h3 class="font-bold text-lg mb-2">User retention increased by 12.4%</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-6 flex-1 leading-relaxed">
+                        The new onboarding sequence launched last Tuesday has correlated with a significant lift in Day-7 retention across all segments.
+                    </p>
+<div class="mt-auto">
+<div class="h-16 w-full opacity-80">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 30">
+<path d="M0,25 Q15,22 25,28 T50,15 T75,10 T100,5" fill="none" stroke="#4c4ceb" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<path d="M0,25 Q15,22 25,28 T50,15 T75,10 T100,5 L100,30 L0,30 Z" fill="url(#grad1)" opacity="0.1"></path>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#4c4ceb;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#4c4ceb;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-5 hover:border-primary/40 transition-all flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-blue-100 dark:bg-blue-500/10 text-blue-600 rounded-lg">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Market Segment</span>
+</div>
+<h3 class="font-bold text-lg mb-2">Enterprise segment shows strong growth</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-6 flex-1 leading-relaxed">
+                        Subscription value for accounts &gt; 50 seats has grown by 8% WoW. Upsell opportunities identified in 14 accounts.
+                    </p>
+<div class="mt-auto">
+<div class="h-16 w-full opacity-80">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 30">
+<path d="M0,20 L10,22 L20,18 L30,25 L40,15 L50,18 L60,10 L70,12 L80,5 L90,8 L100,2" fill="none" stroke="#4c4ceb" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-5 hover:border-primary/40 transition-all flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-amber-100 dark:bg-amber-500/10 text-amber-600 rounded-lg">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Anomaly</span>
+</div>
+<h3 class="font-bold text-lg mb-2">Checkout drop-off in Mobile Safari</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-6 flex-1 leading-relaxed">
+                        Unusual 15% drop in completion rates detected for Safari users on iOS 17. Possible UI glitch in the payment step.
+                    </p>
+<div class="mt-auto">
+<div class="h-16 w-full opacity-80">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 30">
+<path d="M0,5 L20,7 L40,8 L60,25 L80,26 L100,28" fill="none" stroke="#f59e0b" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-5 hover:border-primary/40 transition-all flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-purple-100 dark:bg-purple-500/10 text-purple-600 rounded-lg">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Revenue</span>
+</div>
+<h3 class="font-bold text-lg mb-2">Projected MRR to hit $2.4M next month</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-6 flex-1 leading-relaxed">
+                        Current trend lines suggest a 4.2% beat of your quarterly forecast if the expansion rate remains stable.
+                    </p>
+<div class="mt-auto">
+<div class="h-16 w-full opacity-80">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 30">
+<rect fill="#4c4ceb" height="10" opacity="0.3" width="8" x="0" y="20"></rect>
+<rect fill="#4c4ceb" height="12" opacity="0.4" width="8" x="12" y="18"></rect>
+<rect fill="#4c4ceb" height="15" opacity="0.5" width="8" x="24" y="15"></rect>
+<rect fill="#4c4ceb" height="18" opacity="0.6" width="8" x="36" y="12"></rect>
+<rect fill="#4c4ceb" height="20" opacity="0.7" width="8" x="48" y="10"></rect>
+<rect fill="#4c4ceb" height="22" opacity="0.8" width="8" x="60" y="8"></rect>
+<rect fill="#4c4ceb" height="25" opacity="0.9" width="8" x="72" y="5"></rect>
+<rect fill="#4c4ceb" height="28" opacity="1" width="8" x="84" y="2"></rect>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-5 hover:border-primary/40 transition-all flex flex-col h-full">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined">speed</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Performance</span>
+</div>
+<h3 class="font-bold text-lg mb-2">API Latency improved by 40ms</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 mb-6 flex-1 leading-relaxed">
+                        After the v2.4 deployment, global response times have stabilized. User satisfaction scores (CSAT) are trending up.
+                    </p>
+<div class="mt-auto">
+<div class="h-16 w-full opacity-80">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 30">
+<path d="M0,5 L20,8 L40,15 L60,18 L80,22 L100,25" fill="none" stroke="#4c4ceb" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+</svg>
+</div>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-5 border-dashed flex flex-col items-center justify-center text-center group cursor-pointer">
+<div class="p-4 rounded-full bg-slate-100 dark:bg-primary/10 mb-4 group-hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined text-primary">add</span>
+</div>
+<p class="text-sm font-semibold">Generate custom report</p>
+<p class="text-xs text-slate-500 mt-1">Connect new data sources or define targets</p>
+</div>
+</div>
+</section>
+<section class="mt-12 bg-primary/5 rounded-2xl p-8 border border-primary/10">
+<div class="flex flex-col md:flex-row items-center gap-8">
+<div class="flex-1">
+<h2 class="text-2xl font-bold mb-4">Smart Data Forecasting</h2>
+<p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                        AI Insights has detected a seasonal pattern in your weekend traffic. We recommend adjusting your server scaling policies for the upcoming holiday period.
+                    </p>
+<div class="flex gap-4">
+<button class="bg-primary text-white px-6 py-2 rounded-lg font-medium">View Forecast</button>
+<button class="border border-slate-300 dark:border-primary/30 px-6 py-2 rounded-lg font-medium">Dismiss</button>
+</div>
+</div>
+<div class="w-full md:w-1/3 bg-white dark:bg-background-dark p-4 rounded-xl shadow-xl border border-slate-200 dark:border-primary/20">
+<div class="flex items-center gap-2 mb-4">
+<div class="size-3 rounded-full bg-green-500"></div>
+<span class="text-xs font-bold uppercase text-slate-400">Predicted Load</span>
+</div>
+<div class="space-y-3">
+<div class="h-2 bg-slate-100 dark:bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-3/4 rounded-full"></div>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-1/2 rounded-full"></div>
+</div>
+<div class="h-2 bg-slate-100 dark:bg-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="mt-auto border-t border-slate-200 dark:border-primary/10 px-6 py-8">
+<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs">shield</span>
+<span>Data processing is compliant with GDPR and CCPA standards.</span>
+</div>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</body></html>

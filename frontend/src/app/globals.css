@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4c4ceb;
+  --color-primary-light: #7373f0;
+  --color-background-light: #f8fafc;
+  --color-background-dark: #0a0a14;
+  --font-display: "Inter", sans-serif;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #021239;
+}
+
+[class~="dark"] {
+  --background: #0a0a14;
+  --foreground: #f8fafc;
+}
+
+body {
+  background-color: var(--background) !important;
+  color: var(--foreground) !important;
+  font-family: var(--font-display);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+/* Custom Animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
