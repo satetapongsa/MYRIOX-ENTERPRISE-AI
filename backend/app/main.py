@@ -133,15 +133,19 @@ async def get_chat_sessions(project_id: int = None, db: Session = Depends(get_db
 
 @app.post("/chat/sessions")
 async def create_chat_session(session: dict, db: Session = Depends(get_db)):
-    db_session = schemas.ChatSession(
-        id=session["id"],
-        title=session["title"],
-        project_id=session.get("project_id")
-    )
-    db.add(db_session)
-    db.commit()
-    db.refresh(db_session)
-    return db_session
+    try:
+        db_session = schemas.ChatSession(
+            id=session["id"],
+            title=session["title"],
+            project_id=session.get("project_id")
+        )
+        db.add(db_session)
+        db.commit()
+        db.refresh(db_session)
+        return db_session
+    except Exception as e:
+        print(f"DB Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.patch("/chat/sessions/{session_id}")
 async def update_chat_session(session_id: str, updates: dict, db: Session = Depends(get_db)):
@@ -206,8 +210,13 @@ async def save_chat_message(msg: dict, db: Session = Depends(get_db)):
 
 @app.delete("/chat/sessions/{session_id}")
 async def delete_chat_session(session_id: str, db: Session = Depends(get_db)):
-    db_session = db.query(schemas.ChatSession).filter(schemas.ChatSession.id == session_id).first()
-    if db_session:
-        db.delete(db_session)
-        db.commit()
-    return {"status": "deleted"}
+    try:
+        db_session = db.query(schemas.ChatSession).filter(schemas.ChatSession.id == session_id).first()
+        if db_session:
+            db.delete(db_session)
+            db.commit()
+            return {"status": "deleted"}
+        raise HTTPException(status_code=404, detail="Session not found in Database")
+    except Exception as e:
+        print(f"Purge Logic Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Database constraint error: {str(e)}")
