@@ -6,11 +6,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# Force SQLite for local stability unless specifically requested
-SQLALCHEMY_DATABASE_URL = "sqlite:///./analytica.db"
+# Use DATABASE_URL from env for production (Supabase/Postgres), fallback to local SQLite
+SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./analytica.db")
+
+# Postgres URL fix for SQLAlchemy if using 'postgres://' (common in Heroku/Supabase)
+if SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
+    SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False} if "sqlite" in SQLALCHEMY_DATABASE_URL else {}
+    SQLALCHEMY_DATABASE_URL, 
+    connect_args={"check_same_thread": False} if "sqlite" in SQLALCHEMY_DATABASE_URL else {}
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
