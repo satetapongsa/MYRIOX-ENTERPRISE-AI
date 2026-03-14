@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import MainLayout from '@/components/layout/MainLayout';
 import {
-  Send, Plus, MessageSquare, Trash2, Paperclip, Sparkles, Users, Cpu, Lock, 
+  Send, Plus, MessageSquare, Trash2, Paperclip, Sparkles, Users, Cpu, Lock as LockIcon, 
   X, Copy, Check, FolderPlus, Folder, ChevronRight, ChevronDown, Edit3, MoreHorizontal,
   AlertTriangle, Info, Maximize2, BarChart3, LineChart as LineChartIcon, PieChart as PieChartIcon,
   Layers, Download, RefreshCw
@@ -293,7 +293,7 @@ export default function AIModelsPage() {
         try {
           const newProj = await analyticsApi.createProject(title);
           setProjects(prev => [newProj, ...prev]);
-          setInputModal(prev => ({ ...prev, isOpen: false }));
+          setInputModal((prev: any) => ({ ...prev, isOpen: false }));
         } catch (err) {
           alert("Persistence Error: Failed to write to DB.");
         }
@@ -313,7 +313,7 @@ export default function AIModelsPage() {
         try {
           await analyticsApi.updateProject(id, newTitle);
           setProjects(prev => prev.map(p => p.id === id ? { ...p, title: newTitle } : p));
-          setInputModal(prev => ({ ...prev, isOpen: false }));
+          setInputModal((prev: any) => ({ ...prev, isOpen: false }));
         } catch (err) {
           alert("Update Error: Sync failed.");
         }
@@ -333,7 +333,7 @@ export default function AIModelsPage() {
           await analyticsApi.deleteProject(id);
           setProjects(prev => prev.filter(p => p.id !== id));
           setChats(prev => prev.filter(c => c.project_id !== id));
-          setConfirmModal(prev => ({ ...prev, isOpen: false }));
+          setConfirmModal((prev: any) => ({ ...prev, isOpen: false }));
           if (activeProjectId === id) setActiveProjectId(null);
         } catch (err) {
           alert("Purge Failure: Could not remove records from DB.");
@@ -354,7 +354,7 @@ export default function AIModelsPage() {
         try {
           await analyticsApi.updateChatSession(id, newTitle);
           setChats(prev => prev.map(c => c.id === id ? { ...c, title: newTitle } : c));
-          setInputModal(prev => ({ ...prev, isOpen: false }));
+          setInputModal((prev: any) => ({ ...prev, isOpen: false }));
         } catch (err) {
           alert("Sync Error: Neural session title not saved.");
         }
@@ -373,7 +373,7 @@ export default function AIModelsPage() {
         try {
           await analyticsApi.deleteChatSession(id);
           setChats(prev => prev.filter(c => c.id !== id));
-          setConfirmModal(prev => ({ ...prev, isOpen: false }));
+          setConfirmModal((prev: any) => ({ ...prev, isOpen: false }));
           if (activeChatId === id) setActiveChatId(null);
         } catch (err) {
           alert("Purge Error: Session still exists in records.");
@@ -430,7 +430,7 @@ export default function AIModelsPage() {
       <div className="fixed inset-0 bg-slate-950 flex items-center justify-center z-[100] px-4">
         <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="relative w-full max-w-md bg-white/5 backdrop-blur-3xl border border-white/10 p-10 rounded-[40px] shadow-2xl">
           <div className="flex flex-col items-center text-center">
-            <div className="size-20 bg-primary/20 rounded-3xl flex items-center justify-center mb-8"><Lock className="text-primary" size={36} /></div>
+            <div className="size-20 bg-primary/20 rounded-3xl flex items-center justify-center mb-8"><LockIcon className="text-primary" size={36} /></div>
             <h1 className="text-3xl font-bold text-white mb-2">Neural Access Gate</h1>
             <p className="text-slate-400 mb-8">Enter administrator credentials to proceed.</p>
             <form onSubmit={e => { e.preventDefault(); if(password === 'rootadmin') { setIsAuthenticated(true); localStorage.setItem('admin_auth', 'true'); } else { setAuthError(true); setTimeout(()=>setAuthError(false), 2000); } }} className="w-full space-y-4">
@@ -461,7 +461,7 @@ export default function AIModelsPage() {
             <div className="space-y-1">
                <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4 mb-2 flex items-center gap-2"><Info size={10} /> Uncategorized</div>
                {chats.filter(c => !c.project_id).map(chat => (
-                  <ChatListItem key={chat.id} chat={chat} active={activeChatId === chat.id} onSelect={() => setActiveChatId(chat.id)} onRename={(e) => handleRenameChat(e, chat.id, chat.title)} onDelete={(e) => handleDeleteChat(e, chat.id)} />
+                  <ChatListItem key={chat.id} chat={chat} active={activeChatId === chat.id} onSelect={() => setActiveChatId(chat.id)} onRename={(eVal: any) => handleRenameChat(eVal, chat.id, chat.title)} onDelete={(eVal: any) => handleDeleteChat(eVal, chat.id)} />
                ))}
             </div>
 
@@ -476,16 +476,20 @@ export default function AIModelsPage() {
                            <span className={cn("text-xs font-black truncate max-w-[120px]", expandedFolders[proj.id] && "text-primary")}>{proj.title}</span>
                         </div>
                         <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all">
-                           <button onClick={(e) => { e.stopPropagation(); createNewChat(proj.id); }} title="New Chat" className="p-1.5 hover:bg-primary hover:text-white rounded-lg transition-all"><Plus size={12}/></button>
-                           <button onClick={(e) => handleRenameProject(e, proj.id, proj.title)} title="Rename" className="p-1.5 hover:bg-white dark:hover:bg-white/10 rounded-lg transition-all"><Edit3 size={12}/></button>
-                           <button onClick={(e) => handleDeleteProject(e, proj.id)} title="Purge" className="p-1.5 hover:bg-rose-500 hover:text-white rounded-lg transition-all"><Trash2 size={12}/></button>
+                           <button onClick={(e: React.MouseEvent) => { e.stopPropagation(); createNewChat(proj.id); }} title="New Chat" className="p-1.5 hover:bg-primary hover:text-white rounded-lg transition-all"><Plus size={12}/></button>
+                           <button onClick={(eValue: React.MouseEvent) => handleRenameProject(eValue, proj.id, proj.title)} className="p-1 hover:bg-white/10 rounded-lg text-white/40 hover:text-white transition-colors">
+                  <Edit3 size={14} />
+                </button>
+                <button onClick={(eValue: React.MouseEvent) => handleDeleteProject(eValue, proj.id)} className="p-1 hover:bg-white/10 rounded-lg text-white/40 hover:text-rose-400 transition-colors">
+                  <Trash2 size={14} />
+                </button>
                         </div>
                      </div>
                      <AnimatePresence>
                         {expandedFolders[proj.id] && (
                            <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="pl-4 overflow-hidden space-y-1 mt-1">
                               {chats.filter(c => c.project_id === proj.id).map(chat => (
-                                 <ChatListItem key={chat.id} chat={chat} active={activeChatId === chat.id} onSelect={() => setActiveChatId(chat.id)} onRename={(e) => handleRenameChat(e, chat.id, chat.title)} onDelete={(e) => handleDeleteChat(e, chat.id)} isNested />
+                                 <ChatListItem key={chat.id} chat={chat} active={activeChatId === chat.id} onSelect={() => setActiveChatId(chat.id)} onRename={(eVal: any) => handleRenameChat(eVal, chat.id, chat.title)} onDelete={(eVal: any) => handleDeleteChat(eVal, chat.id)} isNested />
                               ))}
                            </motion.div>
                         )}
@@ -521,7 +525,11 @@ export default function AIModelsPage() {
                 {activeChat?.messages.map((msg: any, i: number) => (
                   <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} key={i} className={cn("flex gap-5", msg.role === 'user' ? "flex-row-reverse" : "flex-row")}>
                     <div className={cn("size-12 rounded-2xl flex items-center justify-center shrink-0 shadow-2xl border transition-transform hover:scale-110", msg.role === 'ai' ? "bg-primary text-white border-primary/20" : "bg-white dark:bg-slate-800 text-slate-400 border-slate-100 dark:border-white/5")}>
-                      {msg.role === 'ai' ? <Sparkles size={22} className="fill-white/20" /> : <Users size={22} />}
+                      {msg.role === 'ai' ? (
+                        <Sparkles size={16} className="text-blue-400" />
+                      ) : (
+                        <LockIcon size={16} className="text-white/60" />
+                      )}
                     </div>
                     <div className={cn("max-w-[85%] px-8 py-6 rounded-[36px] text-[15px] leading-relaxed shadow-xl", msg.role === 'user' ? "bg-primary text-white font-bold rounded-tr-none shadow-primary/20" : "bg-slate-50 dark:bg-slate-900 text-slate-700 dark:text-slate-200 border border-slate-100 dark:border-white/5 rounded-tl-none")}>
                       {msg.role === 'ai' ? (
@@ -546,7 +554,7 @@ export default function AIModelsPage() {
           <div className="p-10 max-w-3xl mx-auto w-full">
             <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-primary/20 rounded-[44px] p-2.5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] flex items-center gap-3 focus-within:ring-4 focus-within:ring-primary/5 transition-all">
                <button className="size-14 rounded-[30px] flex items-center justify-center text-slate-400 hover:text-primary transition-all hover:bg-slate-100 dark:hover:bg-white/5"><Paperclip size={24} /></button>
-               <input className="flex-1 bg-transparent py-5 text-[15px] font-bold outline-none dark:text-white placeholder:text-slate-400" placeholder={`Message ${activeChat?.project_id ? 'Project Neural Assistant' : 'WAVY ANALYTNICA'}...`} value={query} onChange={e => setQuery(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleAskAI(e)} />
+               <input className="flex-1 bg-transparent py-5 text-[15px] font-bold outline-none dark:text-white placeholder:text-slate-400" placeholder={`Message ${activeChat?.project_id ? 'Project Neural Assistant' : 'WAVY ANALYTNICA'}...`} value={query} onChange={e => setQuery(e.target.value)} onKeyDown={(e: any) => e.key === 'Enter' && handleAskAI(e)} />
                <button onClick={handleAskAI} disabled={!query.trim() || isAnalyzing} className="size-14 bg-primary text-white rounded-[30px] flex items-center justify-center hover:scale-105 active:scale-95 shadow-xl shadow-primary/30 transition-all disabled:opacity-50"><Send size={24} /></button>
             </div>
             <p className="text-[10px] text-center text-slate-400 font-bold uppercase tracking-widest mt-8 opacity-40">Neural Network Isolated • Private Shard Storage v4.1 • WAVY ANALYTNICA AI</p>
