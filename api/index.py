@@ -1,7 +1,10 @@
-import sys
 import os
+import sys
 
-# Add the project root to sys.path so 'backend' can be imported
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Get the absolute path to the project root (one level up from this file)
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
 
+# Now we can import the app from the backend package
 from backend.app.main import app
