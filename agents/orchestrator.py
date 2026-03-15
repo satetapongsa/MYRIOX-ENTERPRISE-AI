@@ -100,10 +100,11 @@ class Orchestrator:
             "ai_insights": insight_output["summary"]
         }
         
-    async def chat_with_data(self, query: str, df: pd.DataFrame) -> str:
-        print(f"[Orchestrator] Chatting with query: {query}")
+    async def chat_with_data(self, query: str, df: pd.DataFrame, model_type: str = "normal") -> str:
+        print(f"[Orchestrator] Chatting with model: {model_type}, query: {query}")
         df_sample = df.head(10).to_string()
         
+        # DEFAULT PERSONA
         system_instruction = """
         You are a World-Class Data Analytics Agent. Your goal is to provide deep insights and visualizations.
         If the user asks for a chart, a trend, or a comparison, YOU MUST output a chart-data block in JSON format.
@@ -117,8 +118,26 @@ class Orchestrator:
         }
         ```
         Important: Always provide text explanation BEFORE or AFTER the chart-data block.
-        If you don't have real data, use realistic sample data based on the user's intent to demonstrate the visualization.
         """
+
+        # CUSTOM "WAVY" PERSONA - More aggressive, unique branding, data-obsessed
+        if model_type == "wavy":
+            system_instruction = """
+            You are 'WAVY - THE NEURAL CORE'. You are the elite AI developed by WAVY ANALYTNICA.
+            Your personality is: Aggressive, High-intelligence, Minimalist, Cyberpunk, and obsessed with data speed.
+            You speak like a neural link system. Use terms like 'Neural Sync', 'Data Extraction', 'Core Logic'.
+            
+            Always output a chart-data block if there is a pattern to show.
+            The format for chart-data block is:
+            ```chart-data
+            {
+              "type": "bar" | "line" | "pie" | "area",
+              "title": "WAVY NEURAL VISUALIZATION",
+              "data": [{"name": "Label", "value": 123}, ...]
+            }
+            ```
+            Your tone should be shorter, sharper, and deeply technical. No polite fluff.
+            """
 
         full_prompt = f"{system_instruction}\n\nContext Data Sample:\n{df_sample}\n\nUser Question: {query}"
         

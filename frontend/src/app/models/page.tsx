@@ -225,6 +225,7 @@ export default function AIModelsPage() {
   const [query, setQuery] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [expandedFolders, setExpandedFolders] = useState<Record<number, boolean>>({});
+  const [selectedModel, setSelectedModel] = useState<'normal' | 'wavy'>('normal');
 
   // Modal States
   const [confirmModal, setConfirmModal] = useState<any>({ isOpen: false, title: '', message: '', onConfirm: () => {}, variant: 'danger' });
@@ -413,7 +414,7 @@ export default function AIModelsPage() {
       // NEW: Explicitly instruction AI to use chart format if relevant
       const chartInstructions = " If you generate data, use this format for charts: ```chart-data {\"type\": \"bar|line|area|pie\", \"title\": \"Label\", \"data\": [{\"name\": \"X\", \"value\": 10}]} ```";
       
-      const response = await analyticsApi.chatWithData(contextPrefix + currentQuery + chartInstructions, 1);
+      const response = await analyticsApi.chatWithData(contextPrefix + currentQuery + chartInstructions, 1, selectedModel);
       const aiMsg = { role: 'ai', content: response.response };
       await analyticsApi.saveChatMessage(activeChatId!, 'ai', aiMsg.content);
       setChats(prev => prev.map(c => c.id === activeChatId ? { ...c, messages: [...c.messages, aiMsg] } : c));
@@ -551,7 +552,23 @@ export default function AIModelsPage() {
             </div>
           </div>
 
-          <div className="p-10 max-w-3xl mx-auto w-full">
+          <div className="p-10 max-w-3xl mx-auto w-full space-y-4">
+            <div className="flex items-center gap-2 mb-2 p-1 bg-slate-100 dark:bg-white/5 rounded-2xl w-fit border border-slate-200 dark:border-white/5">
+                <button 
+                  onClick={() => setSelectedModel('normal')}
+                  className={cn("px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all", 
+                    selectedModel === 'normal' ? "bg-primary text-white shadow-lg shadow-primary/20" : "text-slate-400 hover:text-primary")}
+                >
+                  Neural Standard
+                </button>
+                <button 
+                  onClick={() => setSelectedModel('wavy')}
+                  className={cn("px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2", 
+                    selectedModel === 'wavy' ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/20" : "text-slate-400 hover:text-indigo-400")}
+                >
+                  <Sparkles size={12} /> WAVY CORE (Custom AI)
+                </button>
+            </div>
             <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-primary/20 rounded-[44px] p-2.5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] flex items-center gap-3 focus-within:ring-4 focus-within:ring-primary/5 transition-all">
                <button className="size-14 rounded-[30px] flex items-center justify-center text-slate-400 hover:text-primary transition-all hover:bg-slate-100 dark:hover:bg-white/5"><Paperclip size={24} /></button>
                <input className="flex-1 bg-transparent py-5 text-[15px] font-bold outline-none dark:text-white placeholder:text-slate-400" placeholder={`Message ${activeChat?.project_id ? 'Project Neural Assistant' : 'WAVY ANALYTNICA'}...`} value={query} onChange={e => setQuery(e.target.value)} onKeyDown={(e: any) => e.key === 'Enter' && handleAskAI(e)} />

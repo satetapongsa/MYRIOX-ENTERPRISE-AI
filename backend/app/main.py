@@ -53,6 +53,7 @@ router = APIRouter(prefix="/api")
 class ChatRequest(BaseModel):
     query: str
     dataset_id: int
+    model: str = "normal"
 
 @router.get("/health")
 async def health_check():
@@ -70,7 +71,7 @@ async def chat_with_ai(request: ChatRequest, db: Session = Depends(get_db)):
         
         # 2. Call AI with timeout protection
         orchestrator = get_orchestrator()
-        response = await orchestrator.chat_with_data(request.query, df)
+        response = await orchestrator.chat_with_data(request.query, df, model_type=request.model)
         return {"response": response}
     except Exception as e:
         print(f"Chat Endpoint Error: {str(e)}")

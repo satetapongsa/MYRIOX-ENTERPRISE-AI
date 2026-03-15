@@ -31,8 +31,8 @@ export const analyticsApi = {
     return response.data;
   },
   
-  chatWithData: async (query: string, datasetId: number) => {
-    const response = await api.post('/chat', { query, dataset_id: datasetId });
+  chatWithData: async (query: string, datasetId: number, model: string = 'normal') => {
+    const response = await api.post('/chat', { query, dataset_id: datasetId, model });
     return response.data;
   },
 
