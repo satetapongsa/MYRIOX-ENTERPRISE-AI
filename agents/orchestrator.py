@@ -32,17 +32,16 @@ class GeminiAgent(BaseAgent):
             genai.configure(api_key=api_key)
             # Prioritize Gemini 2.0 Flash for best performance/cost
             self.model_names = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-pro']
-
             self.model = None
             for name in self.model_names:
                 try:
                     self.model = genai.GenerativeModel(name)
-                    # We don't know if it's 429 until we call it, so we'll handle that in process
                     break
                 except:
                     continue
         else:
             self.model = None
+            self.model_names = []
 
     async def generate_insights(self, df_sample: str, ml_results: Dict[str, Any]) -> str:
         if not self.model:
@@ -104,6 +103,10 @@ class Orchestrator:
         
     async def chat_with_data(self, query: str, df: pd.DataFrame, model_type: str = "normal") -> str:
         print(f"[Orchestrator] Chatting with model: {model_type}, query: {query}")
+        
+        if not self.gemini_agent.model_names:
+            return "MYRIOX Error: Gemini API Key is missing. Please set GEMINI_API_KEY in Vercel Environment Variables."
+
         df_sample = df.head(10).to_string()
         
         # DEFAULT PERSONA
@@ -152,9 +155,9 @@ class Orchestrator:
                 return response.text
             except Exception as e:
                 error_str = str(e)
-                if "429" in error_str or "404" in error_str:
-                    print(f"[Orchestrator] Model {model_name} failed (429/404). Trying next...")
+                print(f"[Orchestrator] Error with {model_name}: {error_str}")
+                if any(err in error_str for err in ["429", "404", "quota"]):
                     continue
-                return f"Chat Error: {error_str}"
+                return f"Neural Error: {error_str}"
         
-        return "Chat Error: All available Gemini models reached their quota limits. Please try again in a few minutes."
+        return "Chat Error: Connection to Neural Core failed. Please try again."
