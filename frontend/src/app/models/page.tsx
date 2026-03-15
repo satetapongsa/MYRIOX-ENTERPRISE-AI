@@ -426,6 +426,27 @@ export default function AIModelsPage() {
 
   const activeChat = chats.find(c => c.id === activeChatId);
 
+  const handleClearAll = () => {
+    setConfirmModal({
+      isOpen: true,
+      title: 'Memory Purge Protocol',
+      message: 'This will permanently erase all neural conversations. Are you sure?',
+      variant: 'danger',
+      onConfirm: async () => {
+        try {
+          for (const chat of chats) {
+            await analyticsApi.deleteChatSession(chat.id);
+          }
+          setChats([]);
+          setActiveChatId(null);
+          setConfirmModal((prev: any) => ({ ...prev, isOpen: false }));
+        } catch (err) {
+          alert("Purge failed. Connection unstable.");
+        }
+      }
+    });
+  };
+
   if (!isAuthenticated) {
     return (
       <div className="fixed inset-0 bg-slate-950 flex items-center justify-center z-[100] px-4">
@@ -451,55 +472,7 @@ export default function AIModelsPage() {
 
       <div className="flex h-[calc(100vh-100px)] overflow-hidden bg-white dark:bg-background-dark/30 rounded-[40px] border border-slate-200 dark:border-primary/5 shadow-2xl">
         
-        {/* Sidebar */}
-        <div className="w-80 border-r border-slate-50 dark:border-primary/5 flex flex-col bg-slate-50/20 dark:bg-[#080812]">
-          <div className="p-6 space-y-3">
-            <button onClick={() => createNewChat()} className="w-full py-3.5 bg-primary text-white rounded-2xl flex items-center justify-center gap-2 font-black text-[10px] uppercase transition-all shadow-xl shadow-primary/20 active:scale-95"><Plus size={16} /> Global New Chat</button>
-            <button onClick={handleCreateProject} className="w-full py-3.5 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/5 text-slate-600 dark:text-white rounded-2xl flex items-center justify-center gap-2 font-black text-[10px] uppercase hover:bg-slate-50 transition-all shadow-sm"><FolderPlus size={16} /> Create Project</button>
-          </div>
-          
-          <div className="flex-1 overflow-y-auto px-4 space-y-4 no-scrollbar pb-10">
-            <div className="space-y-1">
-               <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4 mb-2 flex items-center gap-2"><Info size={10} /> Uncategorized</div>
-               {chats.filter(c => !c.project_id).map(chat => (
-                  <ChatListItem key={chat.id} chat={chat} active={activeChatId === chat.id} onSelect={() => setActiveChatId(chat.id)} onRename={(eVal: any) => handleRenameChat(eVal, chat.id, chat.title)} onDelete={(eVal: any) => handleDeleteChat(eVal, chat.id)} />
-               ))}
-            </div>
-
-            <div className="space-y-2">
-               <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest px-4 mb-2 flex items-center gap-2"><Folder size={10} /> Project Folders</div>
-               {projects.map(proj => (
-                  <div key={proj.id} className="space-y-1">
-                     <div onClick={() => toggleFolder(proj.id)} className={cn("flex items-center justify-between p-3.5 rounded-2xl cursor-pointer group transition-all", expandedFolders[proj.id] ? "bg-primary/5 border border-primary/10" : "hover:bg-slate-100 dark:hover:bg-white/5")}>
-                        <div className="flex items-center gap-2">
-                           {expandedFolders[proj.id] ? <ChevronDown size={14} className="text-primary" /> : <ChevronRight size={14} className="text-slate-400" />}
-                           <Folder size={16} className={expandedFolders[proj.id] ? "text-primary fill-primary/20" : "text-slate-400"} />
-                           <span className={cn("text-xs font-black truncate max-w-[120px]", expandedFolders[proj.id] && "text-primary")}>{proj.title}</span>
-                        </div>
-                        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-all">
-                           <button onClick={(e: React.MouseEvent) => { e.stopPropagation(); createNewChat(proj.id); }} title="New Chat" className="p-1.5 hover:bg-primary hover:text-white rounded-lg transition-all"><Plus size={12}/></button>
-                           <button onClick={(eValue: React.MouseEvent) => handleRenameProject(eValue, proj.id, proj.title)} className="p-1 hover:bg-white/10 rounded-lg text-white/40 hover:text-white transition-colors">
-                  <Edit3 size={14} />
-                </button>
-                <button onClick={(eValue: React.MouseEvent) => handleDeleteProject(eValue, proj.id)} className="p-1 hover:bg-white/10 rounded-lg text-white/40 hover:text-rose-400 transition-colors">
-                  <Trash2 size={14} />
-                </button>
-                        </div>
-                     </div>
-                     <AnimatePresence>
-                        {expandedFolders[proj.id] && (
-                           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="pl-4 overflow-hidden space-y-1 mt-1">
-                              {chats.filter(c => c.project_id === proj.id).map(chat => (
-                                 <ChatListItem key={chat.id} chat={chat} active={activeChatId === chat.id} onSelect={() => setActiveChatId(chat.id)} onRename={(eVal: any) => handleRenameChat(eVal, chat.id, chat.title)} onDelete={(eVal: any) => handleDeleteChat(eVal, chat.id)} isNested />
-                              ))}
-                           </motion.div>
-                        )}
-                     </AnimatePresence>
-                  </div>
-               ))}
-            </div>
-          </div>
-        </div>
+        {/* Chat Area - Now Full Width */}
 
         {/* Chat Area */}
         <div className="flex-1 flex flex-col bg-white dark:bg-[#0c0c18]">
@@ -515,8 +488,13 @@ export default function AIModelsPage() {
                 </div>
              </div>
              <div className="flex items-center gap-3">
-                <button className="size-10 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-all shadow-sm"><Users size={18} className="text-slate-400" /></button>
-                <button className="size-10 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-white/5 rounded-xl transition-all shadow-sm"><MoreHorizontal size={18} className="text-slate-400" /></button>
+                <button 
+                  onClick={handleClearAll}
+                  className="px-6 py-2.5 bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white rounded-xl transition-all font-black text-[10px] uppercase flex items-center gap-2 shadow-sm border border-rose-500/20"
+                >
+                  <Trash2 size={14} /> Clear Neural Memory
+                </button>
+                <button onClick={() => createNewChat()} className="px-6 py-2.5 bg-primary text-white rounded-xl flex items-center justify-center gap-2 font-black text-[10px] uppercase transition-all shadow-xl shadow-primary/20 active:scale-95"><Plus size={14} /> New Session</button>
              </div>
           </div>
 
