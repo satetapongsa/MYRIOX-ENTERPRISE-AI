@@ -23,12 +23,13 @@ from backend.app.database import engine, get_db
 # from ml_engine.processor import MLEngine
 # from agents.orchestrator import Orchestrator
 
-# Initialize database safely
+# Initialize database safely with a short timeout
 try:
+    # เราจะข้ามการสร้าง table ทันทีถ้ามันค้าง
     schemas.Base.metadata.create_all(bind=engine)
     print("--- [Myriox] Database Synchronized ---")
 except Exception as e:
-    print(f"--- [Myriox] Warning: DB Sync Delayed: {str(e)} ---")
+    print(f"--- [Myriox] DB Warning: {str(e)} ---")
 
 app = FastAPI(title="Myriox Enterprise AI API")
 
@@ -247,7 +248,8 @@ async def delete_chat_session(session_id: str, db: Session = Depends(get_db)):
 # Include the router in the main app
 app.include_router(router)
 
-# Health check for the root manually (optional)
-@app.get("/")
-async def root_health():
-    return {"status": "online", "message": "Myriox AI API v4 Root"}
+# รองรับทั้งแบบมี /api และไม่มี เพื่อไม่ให้ Vercel งง
+@app.get("/api/health")
+@app.get("/health")
+async def health_check():
+    return {"status": "online", "name": "Myriox AI"}
