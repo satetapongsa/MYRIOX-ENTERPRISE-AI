@@ -418,8 +418,10 @@ export default function AIModelsPage() {
       const aiMsg = { role: 'ai', content: response.response };
       await analyticsApi.saveChatMessage(activeChatId!, 'ai', aiMsg.content);
       setChats(prev => prev.map(c => c.id === activeChatId ? { ...c, messages: [...c.messages, aiMsg] } : c));
-    } catch (err) {
-      const errorMsg = { role: 'ai', content: "Neural link timeout. Please check your connection." };
+    } catch (err: any) {
+      console.error("Neural Error:", err);
+      const errorDetail = err.response?.data?.error || err.message || "Connection lost";
+      const errorMsg = { role: 'ai', content: `Neural link failed: ${errorDetail}. Check Vercel Logs for detail.` };
       setChats(prev => prev.map(c => c.id === activeChatId ? { ...c, messages: [...c.messages, errorMsg] } : c));
     } finally { setIsAnalyzing(false); }
   };
