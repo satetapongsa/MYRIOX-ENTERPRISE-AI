@@ -19,6 +19,7 @@ load_dotenv(dotenv_path=os.path.join(root_dir, ".env"))
 
 from backend.app.models import schemas
 from backend.app.database import engine, get_db
+# These will be found because we will set sys.path in index.py
 from ml_engine.processor import MLEngine
 from agents.orchestrator import Orchestrator
 
@@ -210,11 +211,16 @@ async def delete_chat_session(session_id: str, db: Session = Depends(get_db)):
         if not db_session:
             return {"status": "already_deleted"}
         
-        # 2. Manually delete all messages associated with this session
-        # This fixes the "Session still exists in records" error when cascades are missing
+        # 2. Get all messages in this session
+        messages = db.query(schemas.ChatMessage).filter(schemas.ChatMessage.session_id == session_id).all()
+        for msg in messages:
+            # 3. Delete attachments for each message FIRST (CRITICAL FIX)
+            db.query(schemas.ChatAttachment).filter(schemas.ChatAttachment.message_id == msg.id).delete()
+        
+        # 4. Delete all messages
         db.query(schemas.ChatMessage).filter(schemas.ChatMessage.session_id == session_id).delete()
         
-        # 3. Delete the session itself
+        # 5. Finally delete the session
         db.delete(db_session)
         db.commit()
         return {"status": "deleted"}
