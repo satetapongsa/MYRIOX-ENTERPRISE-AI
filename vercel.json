@@ -6,14 +6,14 @@
       "use": "@vercel/next"
     },
     {
-      "src": "api/index.py",
+      "src": "backend/app/main.py",
       "use": "@vercel/python"
     }
   ],
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "api/index.py"
+      "destination": "backend/app/main.py"
     },
     {
       "source": "/(.*)",

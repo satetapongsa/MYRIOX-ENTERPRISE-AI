@@ -1,17 +1,24 @@
+import os
+import sys
+
+# Get the absolute path to the project root (UP TWO LEVELS from backend/app)
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+if root_dir not in sys.path:
+    sys.path.insert(0, root_dir)
+
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, BackgroundTasks, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 import pandas as pd
 import io
-import os
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
 # Load .env explicitly
-load_dotenv(dotenv_path=os.path.join(os.path.dirname(__file__), "..", ".env"))
+load_dotenv(dotenv_path=os.path.join(root_dir, ".env"))
 
-from .models import schemas
-from .database import engine, get_db
+from backend.app.models import schemas
+from backend.app.database import engine, get_db
 from ml_engine.processor import MLEngine
 from agents.orchestrator import Orchestrator
 
