@@ -30,7 +30,7 @@ class GeminiAgent(BaseAgent):
         if api_key:
             genai.configure(api_key=api_key)
             # We'll try a list of models to find one that works
-            self.model_names = ['gemini-flash-latest', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-pro-latest']
+            self.model_names = ['gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-pro-latest']
             self.model = None
             for name in self.model_names:
                 try:

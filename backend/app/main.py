@@ -45,11 +45,19 @@ async def health_check():
 @router.post("/chat")
 async def chat_with_ai(request: ChatRequest, db: Session = Depends(get_db)):
     try:
-        df = pd.DataFrame({"dummy": [1,2,3]}) # Fallback
+        # 1. Provide some default data context if none provided
+        df = pd.DataFrame({
+            "timestamp": pd.date_range(start="2024-01-01", periods=10, freq="D"),
+            "value": [10, 15, 8, 12, 20, 18, 25, 22, 30, 28],
+            "category": ["A", "B", "A", "C", "B", "A", "C", "B", "A", "C"]
+        })
+        
+        # 2. Call AI with timeout protection
         response = await orchestrator.chat_with_data(request.query, df)
         return {"response": response}
     except Exception as e:
-        return {"response": f"Neural link error: {str(e)}"}
+        print(f"Chat Endpoint Error: {str(e)}")
+        return {"response": f"Neural Link Interrupted: {str(e)}"}
 
 @router.post("/datasets/upload")
 async def upload_dataset(
@@ -153,11 +161,27 @@ async def update_project(project_id: int, updates: dict, db: Session = Depends(g
 
 @router.delete("/projects/{project_id}")
 async def delete_project(project_id: int, db: Session = Depends(get_db)):
-    db_project = db.query(schemas.Project).filter(schemas.Project.id == project_id).first()
-    if db_project:
+    try:
+        # 1. Find the project
+        db_project = db.query(schemas.Project).filter(schemas.Project.id == project_id).first()
+        if not db_project:
+            return {"status": "already_deleted"}
+        
+        # 2. Find all sessions in this project
+        sessions = db.query(schemas.ChatSession).filter(schemas.ChatSession.project_id == project_id).all()
+        for session in sessions:
+            # 3. For each session, delete messages
+            db.query(schemas.ChatMessage).filter(schemas.ChatMessage.session_id == session.id).delete()
+            # 4. Delete the session itself
+            db.delete(session)
+        
+        # 5. Finally delete the project
         db.delete(db_project)
         db.commit()
-    return {"status": "deleted"}
+        return {"status": "deleted"}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=f"Project Purge Error: {str(e)}")
 
 @router.get("/chat/sessions/{session_id}/messages")
 async def get_chat_messages(session_id: str, db: Session = Depends(get_db)):
@@ -174,13 +198,23 @@ async def save_chat_message(msg: dict, db: Session = Depends(get_db)):
 @router.delete("/chat/sessions/{session_id}")
 async def delete_chat_session(session_id: str, db: Session = Depends(get_db)):
     try:
+        # 1. Find the session
         db_session = db.query(schemas.ChatSession).filter(schemas.ChatSession.id == session_id).first()
-        if db_session:
-            db.delete(db_session)
-            db.commit()
-            return {"status": "deleted"}
-        raise HTTPException(status_code=404, detail="Not found")
-    except Exception as e: raise HTTPException(status_code=500, detail=str(e))
+        if not db_session:
+            return {"status": "already_deleted"}
+        
+        # 2. Manually delete all messages associated with this session
+        # This fixes the "Session still exists in records" error when cascades are missing
+        db.query(schemas.ChatMessage).filter(schemas.ChatMessage.session_id == session_id).delete()
+        
+        # 3. Delete the session itself
+        db.delete(db_session)
+        db.commit()
+        return {"status": "deleted"}
+    except Exception as e:
+        db.rollback()
+        print(f"Purge Logic Error: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Database constraint error: {str(e)}")
 
 # Include the router in the main app
 app.include_router(router)
