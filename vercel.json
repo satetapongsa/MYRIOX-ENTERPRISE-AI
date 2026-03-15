@@ -6,18 +6,15 @@
       "use": "@vercel/next"
     },
     {
-      "src": "index.py",
+      "src": "api/index.py",
       "use": "@vercel/python"
     }
   ],
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "index.py"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "frontend/$1"
+      "destination": "api/index.py"
     }
   ]
 }
+
