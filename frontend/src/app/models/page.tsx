@@ -225,7 +225,7 @@ export default function AIModelsPage() {
   const [query, setQuery] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [expandedFolders, setExpandedFolders] = useState<Record<number, boolean>>({});
-  const [selectedModel, setSelectedModel] = useState<'normal' | 'wavy'>('normal');
+  const [selectedModel, setSelectedModel] = useState<'normal' | 'myriox'>('normal');
 
   // Modal States
   const [confirmModal, setConfirmModal] = useState<any>({ isOpen: false, title: '', message: '', onConfirm: () => {}, variant: 'danger' });
@@ -272,7 +272,7 @@ export default function AIModelsPage() {
       id: newId,
       title: 'New Discussion',
       project_id: targetProjectId,
-      messages: [{ role: 'ai', content: `Hello! I am your WAVY ANALYTNICA agent. I notice you're working in ${targetProjectId ? 'this project context' : 'global context'}. How can I assist you today?` }]
+      messages: [{ role: 'ai', content: `Hello! I am Myriox, your Enterprise AI assistant. I notice you're working in ${targetProjectId ? 'this project context' : 'global context'}. How can I assist you today?` }]
     };
     try {
       await analyticsApi.createChatSession(newId, newChat.title, newChat.project_id);
@@ -562,19 +562,19 @@ export default function AIModelsPage() {
                   Neural Standard
                 </button>
                 <button 
-                  onClick={() => setSelectedModel('wavy')}
+                  onClick={() => setSelectedModel('myriox')}
                   className={cn("px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all flex items-center gap-2", 
-                    selectedModel === 'wavy' ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/20" : "text-slate-400 hover:text-indigo-400")}
+                    selectedModel === 'myriox' ? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/20" : "text-slate-400 hover:text-indigo-400")}
                 >
-                  <Sparkles size={12} /> WAVY CORE (Custom AI)
+                  <Sparkles size={12} /> MYRIOX CORE (Custom AI)
                 </button>
             </div>
             <div className="relative bg-white dark:bg-slate-900 border border-slate-200 dark:border-primary/20 rounded-[44px] p-2.5 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] flex items-center gap-3 focus-within:ring-4 focus-within:ring-primary/5 transition-all">
                <button className="size-14 rounded-[30px] flex items-center justify-center text-slate-400 hover:text-primary transition-all hover:bg-slate-100 dark:hover:bg-white/5"><Paperclip size={24} /></button>
-               <input className="flex-1 bg-transparent py-5 text-[15px] font-bold outline-none dark:text-white placeholder:text-slate-400" placeholder={`Message ${activeChat?.project_id ? 'Project Neural Assistant' : 'WAVY ANALYTNICA'}...`} value={query} onChange={e => setQuery(e.target.value)} onKeyDown={(e: any) => e.key === 'Enter' && handleAskAI(e)} />
+               <input className="flex-1 bg-transparent py-5 text-[15px] font-bold outline-none dark:text-white placeholder:text-slate-400" placeholder={`Message ${activeChat?.project_id ? 'Project Neural Assistant' : 'Myriox'}...`} value={query} onChange={e => setQuery(e.target.value)} onKeyDown={(e: any) => e.key === 'Enter' && handleAskAI(e)} />
                <button onClick={handleAskAI} disabled={!query.trim() || isAnalyzing} className="size-14 bg-primary text-white rounded-[30px] flex items-center justify-center hover:scale-105 active:scale-95 shadow-xl shadow-primary/30 transition-all disabled:opacity-50"><Send size={24} /></button>
             </div>
-            <p className="text-[10px] text-center text-slate-400 font-bold uppercase tracking-widest mt-8 opacity-40">Neural Network Isolated • Private Shard Storage v4.1 • WAVY ANALYTNICA AI</p>
+            <p className="text-[10px] text-center text-slate-400 font-bold uppercase tracking-widest mt-8 opacity-40">Neural Network Isolated • Private Shard Storage v4.1 • MYRIOX AI</p>
           </div>
         </div>
       </div>

@@ -7,11 +7,11 @@ root_dir = os.path.dirname(os.path.abspath(__file__))
 if root_dir not in sys.path:
     sys.path.insert(0, root_dir)
 
-print("--- [Wavy Analytica] Initializing Neural Engine on Vercel ---")
+print("--- [Myriox] Initializing Neural Engine on Vercel ---")
 
 try:
     from backend.app.main import app
-    print("--- [Wavy Analytica] API successfully loaded ---")
+    print("--- [Myriox] API successfully loaded ---")
 except Exception as e:
-    print(f"--- [Wavy Analytica] ERROR LOADING API: {str(e)} ---")
+    print(f"--- [Myriox] ERROR LOADING API: {str(e)} ---")
     raise

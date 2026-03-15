@@ -47,7 +47,7 @@ class GeminiAgent(BaseAgent):
             return "Gemini API Key missing. Please set GEMINI_API_KEY in .env"
 
         prompt = f"""
-        You are a Senior Data Scientist at WAVY ANALYTNICA. 
+        You are a Senior Data Scientist at MYRIOX. 
         Analyze the following data sample and ML results. 
         Provide professional, actionable business insights.
         
@@ -120,10 +120,10 @@ class Orchestrator:
         Important: Always provide text explanation BEFORE or AFTER the chart-data block.
         """
 
-        # CUSTOM "WAVY" PERSONA - More aggressive, unique branding, data-obsessed
-        if model_type == "wavy":
+        # CUSTOM "MYRIOX" PERSONA - More aggressive, unique branding, data-obsessed
+        if model_type == "myriox":
             system_instruction = """
-            You are 'WAVY - THE NEURAL CORE'. You are the elite AI developed by WAVY ANALYTNICA.
+            You are 'MYRIOX - THE NEURAL CORE'. You are the elite AI developed by MYRIOX.
             Your personality is: Aggressive, High-intelligence, Minimalist, Cyberpunk, and obsessed with data speed.
             You speak like a neural link system. Use terms like 'Neural Sync', 'Data Extraction', 'Core Logic'.
             
@@ -132,7 +132,7 @@ class Orchestrator:
             ```chart-data
             {
               "type": "bar" | "line" | "pie" | "area",
-              "title": "WAVY NEURAL VISUALIZATION",
+              "title": "MYRIOX NEURAL VISUALIZATION",
               "data": [{"name": "Label", "value": 123}, ...]
             }
             ```

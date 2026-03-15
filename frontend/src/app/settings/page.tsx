@@ -163,13 +163,13 @@ const ProfileSection = ({ isSaving, setIsSaving }: any) => {
                  <div className="space-y-2">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-2">Work Email</label>
                     <div className="w-full bg-slate-50 dark:bg-primary/5 border border-slate-100 dark:border-primary/5 rounded-2xl px-6 py-3.5 text-sm font-bold dark:text-white flex items-center gap-2 opacity-70">
-                       wavy@analytnica.ai
+                       hello@myriox.ai
                     </div>
                  </div>
                  <div className="md:col-span-2">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2 block px-2">Professional Biography</label>
                     <div className="w-full bg-slate-50 dark:bg-primary/5 border border-slate-100 dark:border-primary/5 rounded-2xl px-6 py-4 text-sm font-medium dark:text-white opacity-70">
-                       CEO & Founder at WAVY ANALYTNICA. Leading the next generation of neural-first enterprise intelligence systems. Authorized executive access only.
+                       CEO & Founder at MYRIOX. Leading the next generation of neural-first enterprise intelligence systems. Authorized executive access only.
                     </div>
                  </div>
               </div>
@@ -295,9 +295,9 @@ const TeamSection = () => (
               </tr>
            </thead>
            <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
-              <TeamRow name="เวฟนิกา (You)" email="wavy@analytnica.ai" role="Owner" status="Active" isOwner />
-              <TeamRow name="Sarah Chen" email="sarah.c@analytnica.ai" role="Lead Engineer" status="Active" />
-              <TeamRow name="Marcus Wright" email="m.wright@analytnica.ai" role="Data Analyst" status="Away" />
+              <TeamRow name="เวฟนิกา (You)" email="hello@myriox.ai" role="Owner" status="Active" isOwner />
+              <TeamRow name="Sarah Chen" email="sarah.c@myriox.ai" role="Lead Engineer" status="Active" />
+              <TeamRow name="Marcus Wright" email="m.wright@myriox.ai" role="Data Analyst" status="Away" />
            </tbody>
         </table>
      </div>
@@ -332,7 +332,7 @@ const BillingSection = () => (
         <div className="md:col-span-2 bg-gradient-to-br from-primary to-indigo-700 p-10 rounded-[40px] text-white shadow-2xl relative overflow-hidden">
            <div className="relative z-10">
               <p className="text-xs font-black uppercase tracking-[0.3em] opacity-60 mb-2">Current Plan</p>
-              <h3 className="text-4xl font-black mb-6">WAVY ENTERPRISE</h3>
+              <h3 className="text-4xl font-black mb-6">MYRIOX ENTERPRISE</h3>
               <div className="flex items-center gap-6 text-sm font-bold">
                  <div className="flex items-center gap-2"><div className="size-2 bg-white rounded-full animate-pulse" /> Unlimited Compute</div>
                  <div className="flex items-center gap-2"><div className="size-2 bg-white rounded-full animate-pulse" /> 24/7 Priority Support</div>

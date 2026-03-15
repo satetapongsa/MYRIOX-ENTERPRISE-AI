@@ -26,11 +26,11 @@ from backend.app.database import engine, get_db
 # Initialize database safely
 try:
     schemas.Base.metadata.create_all(bind=engine)
-    print("--- [Wavy Analytica] Database Synchronized ---")
+    print("--- [Myriox] Database Synchronized ---")
 except Exception as e:
-    print(f"--- [Wavy Analytica] Warning: DB Sync Delayed: {str(e)} ---")
+    print(f"--- [Myriox] Warning: DB Sync Delayed: {str(e)} ---")
 
-app = FastAPI(title="Wavy Analytica Enterprise API")
+app = FastAPI(title="Myriox Enterprise AI API")
 
 # Configure CORS
 app.add_middleware(
@@ -250,4 +250,4 @@ app.include_router(router)
 # Health check for the root manually (optional)
 @app.get("/")
 async def root_health():
-    return {"status": "online", "message": "Wavy Analytica API v4 Root"}
+    return {"status": "online", "message": "Myriox AI API v4 Root"}

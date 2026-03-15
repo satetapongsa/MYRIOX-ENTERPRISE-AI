@@ -47,11 +47,11 @@ const Sidebar = () => {
 
           <div className="flex flex-col relative">
             <h1 className="text-2xl font-black tracking-tighter text-slate-800 dark:text-white leading-none mb-1">
-              WAVY
+              MYRIOX
             </h1>
             <div className="flex items-center gap-2">
               <span className="text-[9px] font-black text-primary uppercase tracking-[0.3em]">
-                ANALYTNICA
+                ENTERPRISE AI
               </span>
               <div className="size-1 bg-primary rounded-full animate-ping"></div>
             </div>
@@ -87,7 +87,7 @@ const Sidebar = () => {
       <div className="p-4 mt-auto">
         <Link href="/settings" className="block bg-slate-50 dark:bg-primary/5 rounded-2xl p-4 border border-slate-100 dark:border-primary/10 mb-4 hover:shadow-lg hover:border-primary/30 transition-all group">
           <div className="flex items-center gap-3 mb-3">
-            <div className="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold group-hover:scale-110 transition-transform"> WV </div>
+            <div className="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold group-hover:scale-110 transition-transform"> MX </div>
             <div className="flex-1 min-w-0">
                <p className="text-sm font-bold truncate dark:text-white group-hover:text-primary transition-colors">เวฟนิกา</p>
                <p className="text-xs text-slate-500 truncate">CEO & Founder</p>

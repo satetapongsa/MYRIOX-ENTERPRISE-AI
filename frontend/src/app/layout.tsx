@@ -6,7 +6,7 @@ import Providers from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "WAVY ANALYTNICA | Enterprise AI Platform",
+  title: "MYRIOX | Enterprise AI Platform",
   description: "Next-generation AI-powered data analytics and business intelligence.",
 };
 

@@ -37,7 +37,7 @@ export default function LoginPage() {
            <div className="size-16 bg-white dark:bg-slate-900 rounded-3xl shadow-2xl flex items-center justify-center text-primary mx-auto border-4 border-white dark:border-primary/20 hover:scale-110 transition-transform duration-500">
               <Sparkles size={32} className="animate-pulse" />
            </div>
-           <h1 className="text-4xl font-extrabold tracking-tight dark:text-white">WAVY ANALYTNICA</h1>
+           <h1 className="text-4xl font-extrabold tracking-tight dark:text-white">MYRIOX</h1>
            <p className="text-slate-500 dark:text-slate-400 font-medium">Enterprise intelligence for modern teams.</p>
         </div>
 
@@ -112,7 +112,7 @@ export default function LoginPage() {
            </div>
         </div>
         <p className="text-center text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-           Protected by Wavy Shield v2.4 <br />
+           Protected by Myriox Shield v2.4 <br />
            Authorized Personnel Only
         </p>
       </div>
