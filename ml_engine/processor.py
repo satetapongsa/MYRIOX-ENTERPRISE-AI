@@ -6,9 +6,18 @@ from sklearn.preprocessing import StandardScaler
 from typing import Dict, List, Any
 
 class MLEngine:
-    def __init__(self, df: pd.DataFrame):
+    def __init__(self, df: Any):
         self.df = df
-        self.numeric_cols = df.select_dtypes(include=[np.number]).columns.tolist()
+        # Ensure we have a DataFrame and handle potential pandas issues on Vercel
+        if not hasattr(df, 'select_dtypes'):
+             # Fallback if somehow it's not a real DataFrame
+             import pandas as pd
+             if isinstance(df, dict):
+                 self.df = pd.DataFrame(df)
+             else:
+                 self.df = pd.DataFrame()
+        
+        self.numeric_cols = self.df.select_dtypes(include=[np.number]).columns.tolist()
 
     def run_full_analysis(self) -> Dict[str, Any]:
         """Runs the entire analysis pipeline."""
