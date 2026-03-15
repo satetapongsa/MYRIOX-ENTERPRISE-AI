@@ -26,11 +26,13 @@ class DataAnalysisAgent(BaseAgent):
 class GeminiAgent(BaseAgent):
     def __init__(self):
         super().__init__("GeminiAgent")
-        api_key = os.getenv("GEMINI_API_KEY")
+        # Try multiple common env var names for the API Key
+        api_key = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")
         if api_key:
             genai.configure(api_key=api_key)
-            # We'll try a list of models to find one that works
-            self.model_names = ['gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-pro-latest']
+            # Prioritize Gemini 2.0 Flash for best performance/cost
+            self.model_names = ['gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-pro']
+
             self.model = None
             for name in self.model_names:
                 try:
