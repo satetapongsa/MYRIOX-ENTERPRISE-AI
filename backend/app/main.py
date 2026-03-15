@@ -23,8 +23,12 @@ from backend.app.database import engine, get_db
 # from ml_engine.processor import MLEngine
 # from agents.orchestrator import Orchestrator
 
-# Initialize database
-schemas.Base.metadata.create_all(bind=engine)
+# Initialize database safely
+try:
+    schemas.Base.metadata.create_all(bind=engine)
+    print("--- [Wavy Analytica] Database Synchronized ---")
+except Exception as e:
+    print(f"--- [Wavy Analytica] Warning: DB Sync Delayed: {str(e)} ---")
 
 app = FastAPI(title="Wavy Analytica Enterprise API")
 
