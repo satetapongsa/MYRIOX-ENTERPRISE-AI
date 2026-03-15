@@ -14,7 +14,12 @@
     {
       "source": "/api/(.*)",
       "destination": "api/index.py"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/frontend/$1"
     }
   ]
 }
+
 
