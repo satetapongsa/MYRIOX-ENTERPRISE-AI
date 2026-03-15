@@ -20,8 +20,8 @@ load_dotenv(dotenv_path=os.path.join(root_dir, ".env"))
 from backend.app.models import schemas
 from backend.app.database import engine, get_db
 # These will be found because we will set sys.path in index.py
-from ml_engine.processor import MLEngine
-from agents.orchestrator import Orchestrator
+# from ml_engine.processor import MLEngine
+# from agents.orchestrator import Orchestrator
 
 # Initialize database
 schemas.Base.metadata.create_all(bind=engine)
@@ -37,7 +37,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-orchestrator = Orchestrator()
+# Lazy Orchestrator internal
+_orchestrator = None
+
+def get_orchestrator():
+    global _orchestrator
+    if _orchestrator is None:
+        from agents.orchestrator import Orchestrator
+        _orchestrator = Orchestrator()
+    return _orchestrator
 
 # --- API ROUTER ---
 router = APIRouter(prefix="/api")
@@ -61,6 +69,7 @@ async def chat_with_ai(request: ChatRequest, db: Session = Depends(get_db)):
         })
         
         # 2. Call AI with timeout protection
+        orchestrator = get_orchestrator()
         response = await orchestrator.chat_with_data(request.query, df)
         return {"response": response}
     except Exception as e:
@@ -95,6 +104,7 @@ async def upload_dataset(
     return {"id": dataset.id, "status": "processing"}
 
 async def process_analysis(dataset_id: int, df: pd.DataFrame, db: Session):
+    orchestrator = get_orchestrator()
     results = await orchestrator.run_pipeline(df)
     insight = schemas.Insight(
         dataset_id=dataset_id,
