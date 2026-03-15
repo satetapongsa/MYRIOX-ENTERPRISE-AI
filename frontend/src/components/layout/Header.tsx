@@ -43,12 +43,6 @@ const Header = () => {
             <Bell size={20} />
             <span className="absolute top-2.5 right-2.5 size-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark shadow-[0_0_8px_rgba(239,68,68,0.5)]"></span>
           </button>
-          <button 
-            onClick={() => setTheme(isDark ? 'light' : 'dark')}
-            className="size-11 rounded-xl bg-slate-50 dark:bg-primary/5 border border-slate-100 dark:border-primary/10 flex items-center justify-center text-slate-500 hover:text-primary hover:bg-white dark:hover:bg-primary/20 hover:shadow-lg transition-all"
-          >
-            {isDark ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
         </div>
 
         <div className="h-8 w-px bg-slate-200 dark:bg-primary/20"></div>

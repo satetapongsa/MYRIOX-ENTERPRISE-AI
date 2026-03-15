@@ -16,7 +16,7 @@ import { cn } from '@/lib/utils';
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
-  { icon: Zap, label: 'AI Models', href: '/models' },
+  { icon: Zap, label: 'Neural Chat', href: '/models' },
   { icon: Database, label: 'Datasets', href: '/datasets' },
   { icon: FileText, label: 'Reports', href: '/reports' },
   { icon: Settings, label: 'Settings', href: '/settings' },

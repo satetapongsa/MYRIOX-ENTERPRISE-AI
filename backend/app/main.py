@@ -1,14 +1,12 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Depends
+from fastapi import FastAPI, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from p_models.chat import ChatRequest
-from agents.orchestrator import Orchestrator
 import pandas as pd
 import uvicorn
 
-app = FastAPI(title="Myriox AI API")
-orchestrator = Orchestrator()
+app = FastAPI(title="Myriox API")
 
-# CORS configured for Vercel
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -21,24 +19,18 @@ router = APIRouter(prefix="/api")
 
 @router.get("/health")
 async def health():
-    return {"status": "online", "engine": "Myriox Neural v4"}
+    return {"status": "online", "message": "Myriox Core Standing By"}
 
 @router.post("/ask-ai")
 async def ask_ai(request: ChatRequest):
-    try:
-        # ใช้ข้อมูลจำลองเพื่อความเร็วและตัดปัญหา DB
-        df = pd.DataFrame({"info": ["Myriox System Active"]})
-        response = await orchestrator.chat_with_data(request.query, df, request.model_type)
-        return {"response": response}
-    except Exception as e:
-        return {"response": f"Neural Core Error: {str(e)}"}
+    # Mock response for now as requested to start fresh
+    return {"response": "Neural connection established. I am Myriox. How can I assist you today?"}
 
 app.include_router(router)
 
-# สำหรับ Vercel
 @app.get("/")
 async def root():
-    return {"message": "Myriox Business AI Root"}
+    return {"message": "Myriox API Root"}
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
