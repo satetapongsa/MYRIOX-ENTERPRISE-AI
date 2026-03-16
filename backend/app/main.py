@@ -38,8 +38,13 @@ async def health():
 
 @router.post("/chat")
 async def chat(request: ChatRequest):
-    # Standard response for fresh start
-    return {"response": "System reboot complete. Neural core in standby. How can I assist you?"}
+    try:
+        # ส่งคำถามไปยัง Orchestrator
+        # เราส่ง df=None ไปก่อน เพราะตอนนี้ยังไม่ได้โหลดไฟล์
+        response = await orchestrator.chat_with_data(request.query, None, request.model)
+        return {"response": response}
+    except Exception as e:
+        return {"response": f"Backend Error: {str(e)}"}
 
 @router.get("/chat/sessions")
 async def get_sessions():
