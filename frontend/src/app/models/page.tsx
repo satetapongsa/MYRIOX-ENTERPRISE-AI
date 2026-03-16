@@ -46,8 +46,10 @@ export default function ClaudeStyleChat() {
       const response = await analyticsApi.chatWithData(query, 1, 'myriox');
       const aiMsg = { role: 'ai', content: response.response };
       setMessages(prev => [...prev, aiMsg]);
-    } catch (err) {
-      setMessages(prev => [...prev, { role: 'ai', content: "Neural link failed. The core is currently undergoing maintenance." }]);
+    } catch (err: any) {
+      console.error("DEBUG:", err);
+      const errorDetail = err.response?.data?.response || err.message || "Unknown Connection Error";
+      setMessages(prev => [...prev, { role: 'ai', content: `Neural Error: [${errorDetail}]. Check logs or API Key.` }]);
     } finally {
       setIsLoading(false);
     }

@@ -29,8 +29,8 @@ class SessionRequest(BaseModel):
     title: str
     project_id: Optional[int] = None
 
-# Router
-router = APIRouter(prefix="/api")
+# Router - เอา /api ออกเพื่อให้เข้าคู่กับ vercel.json
+router = APIRouter()
 
 @router.get("/health")
 async def health():
