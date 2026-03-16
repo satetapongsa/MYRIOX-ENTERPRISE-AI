@@ -3,6 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Optional, List
 import uvicorn
+from agents.orchestrator import Orchestrator
+
+# Initialize AI Brain
+orchestrator = Orchestrator()
 
 app = FastAPI(title="Myriox AI API")
 
@@ -29,8 +33,8 @@ class SessionRequest(BaseModel):
     title: str
     project_id: Optional[int] = None
 
-# Router - เอา /api ออกเพื่อให้เข้าคู่กับ vercel.json
-router = APIRouter()
+# Router
+router = APIRouter(prefix="/api")
 
 @router.get("/health")
 async def health():
