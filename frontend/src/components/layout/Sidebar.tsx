@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, 
   Database, 
@@ -24,6 +24,13 @@ const menuItems = [
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // Clear any auth data if exists
+    localStorage.removeItem('admin_auth');
+    router.push('/login');
+  };
 
   return (
     <aside className="w-72 border-r border-slate-200 dark:border-primary/20 flex flex-col h-screen bg-white dark:bg-background-dark sticky top-0 transition-all duration-300">
@@ -99,7 +106,10 @@ const Sidebar = () => {
           <p className="text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-tight">7.5GB / 10GB Used</p>
         </Link>
         
-        <button className="flex w-full items-center gap-4 px-4 py-3 text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-all group">
+        <button 
+          onClick={handleLogout}
+          className="flex w-full items-center gap-4 px-4 py-3 text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 rounded-xl transition-all group"
+        >
           <LogOut size={20} />
           <span className="text-sm font-bold">Logout</span>
         </button>

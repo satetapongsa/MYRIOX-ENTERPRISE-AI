@@ -361,11 +361,16 @@ const WorkspaceSection = () => (
             <div className="space-y-4">
                <h4 className="font-bold dark:text-white flex items-center gap-2"><Globe size={16} className="text-primary" /> Regional Deployment</h4>
                <p className="text-xs text-slate-500">Choose where your neural processing happens. Currently set to APAC (Singapore).</p>
-               <select className="w-full bg-slate-50 dark:bg-primary/5 border border-slate-100 dark:border-primary/5 rounded-2xl px-6 py-4 text-sm font-bold dark:text-white outline-none">
-                  <option>APAC (Singapore)</option>
-                  <option>US East (Virginia)</option>
-                  <option>EU West (Frankfurt)</option>
-               </select>
+               <div className="relative group/select">
+                  <select className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-primary/20 rounded-2xl px-6 py-4 text-sm font-bold dark:text-white outline-none appearance-none cursor-pointer focus:ring-4 focus:ring-primary/10 transition-all">
+                     <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">APAC (Singapore)</option>
+                     <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">US East (Virginia)</option>
+                     <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">EU West (Frankfurt)</option>
+                  </select>
+                  <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 group-hover/select:text-primary transition-colors">
+                     <ChevronRight size={16} className="rotate-90" />
+                  </div>
+               </div>
             </div>
             <div className="space-y-4">
                <h4 className="font-bold dark:text-white flex items-center gap-2"><RefreshCw size={16} className="text-primary" /> Model Auto-Update</h4>
