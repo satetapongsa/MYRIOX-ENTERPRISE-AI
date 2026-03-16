@@ -148,7 +148,7 @@ const ProfileSection = ({ isSaving, setIsSaving }: any) => {
 
            <div className="p-10 flex flex-col md:flex-row items-center gap-10">
               <div className="relative group">
-                 <div className="size-32 rounded-full border-4 border-white dark:border-slate-800 shadow-2xl bg-[url('https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=200')] bg-cover"></div>
+                 <div className="size-32 rounded-full border-4 border-white dark:border-slate-800 shadow-2xl bg-[url('/profile.png')] bg-cover bg-center"></div>
                  <div className="absolute bottom-1 right-1 size-10 bg-emerald-500 text-white rounded-full flex items-center justify-center border-4 border-white dark:border-slate-800 shadow-xl">
                     <CheckCircle2 size={20} />
                  </div>
@@ -163,7 +163,7 @@ const ProfileSection = ({ isSaving, setIsSaving }: any) => {
                  <div className="space-y-2">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] ml-2">Work Email</label>
                     <div className="w-full bg-slate-50 dark:bg-primary/5 border border-slate-100 dark:border-primary/5 rounded-2xl px-6 py-3.5 text-sm font-bold dark:text-white flex items-center gap-2 opacity-70">
-                       hello@myriox.ai
+                       wavenigga@gmail.co.th
                     </div>
                  </div>
                  <div className="md:col-span-2">
@@ -295,7 +295,7 @@ const TeamSection = () => (
               </tr>
            </thead>
            <tbody className="divide-y divide-slate-50 dark:divide-slate-800">
-              <TeamRow name="เวฟนิกา (You)" email="hello@myriox.ai" role="Owner" status="Active" isOwner />
+              <TeamRow name="เวฟนิกา (You)" email="wavenigga@gmail.co.th" role="Owner" status="Active" isOwner />
               <TeamRow name="Sarah Chen" email="sarah.c@myriox.ai" role="Lead Engineer" status="Active" />
               <TeamRow name="Marcus Wright" email="m.wright@myriox.ai" role="Data Analyst" status="Away" />
            </tbody>
